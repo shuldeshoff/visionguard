@@ -1,0 +1,61 @@
+# Зависимости
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+*.egg-info/
+dist/
+build/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Переменные окружения
+.env
+.env.local
+.env.*.local
+
+# Логи
+*.log
+logs/
+
+# Временные файлы
+tmp/
+temp/
+*.tmp
+
+# Сборки
+dist/
+build/
+out/
+.next/
+.nuxt/
+
+# Тестирование
+coverage/
+.nyc_output/
+*.lcov
+
+# Операционная система
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
