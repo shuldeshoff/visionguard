@@ -3,8 +3,13 @@
 """
 from pathlib import Path
 from typing import Optional
-import magic
 import logging
+
+try:
+    import magic
+    HAS_MAGIC = True
+except ImportError:
+    HAS_MAGIC = False
 
 from src.config import settings
 from src.utils.exceptions import (
@@ -92,6 +97,10 @@ class VideoValidator:
         Raises:
             UnsupportedFormatError: Если MIME тип не поддерживается
         """
+        if not HAS_MAGIC:
+            logger.debug("python-magic not installed, skipping MIME type check")
+            return
+        
         try:
             mime = magic.Magic(mime=True)
             mime_type = mime.from_file(str(file_path))
@@ -102,9 +111,7 @@ class VideoValidator:
             
             logger.debug(f"MIME type OK: {mime_type}")
         except Exception as e:
-            logger.error(f"Error checking MIME type: {e}")
-            # Если libmagic не установлен, пропускаем проверку
-            pass
+            logger.debug(f"Error checking MIME type: {e}, skipping check")
     
     def validate_file_exists(self, file_path: Path) -> None:
         """
