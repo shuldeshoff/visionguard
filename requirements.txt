@@ -22,4 +22,5 @@ python-dotenv==1.0.0
 
 # Utilities
 aiofiles==23.2.1
+python-magic==0.4.27
 

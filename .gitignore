@@ -52,6 +52,9 @@ out/
 coverage/
 .nyc_output/
 *.lcov
+tests/fixtures/*.mp4
+tests/fixtures/*.avi
+tests/fixtures/*.mov
 
 # Операционная система
 .DS_Store
