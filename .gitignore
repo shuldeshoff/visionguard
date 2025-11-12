@@ -50,8 +50,12 @@ out/
 
 # Тестирование
 coverage/
+htmlcov/
 .nyc_output/
 *.lcov
+.coverage
+.coverage.*
+.hypothesis/
 tests/fixtures/*.mp4
 tests/fixtures/*.avi
 tests/fixtures/*.mov
