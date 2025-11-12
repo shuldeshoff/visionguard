@@ -1,5 +1,10 @@
 # VisionGuard 🎥🔍
 
+[![CI](https://github.com/shuldeshoff/visionguard/workflows/CI/badge.svg)](https://github.com/shuldeshoff/visionguard/actions)
+[![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+
 > Микросервис для анализа видео с производственных камер и выявления нарушений
 
 ## 📖 О проекте
@@ -144,31 +149,45 @@ PostgreSQL таблица `video_analyses`:
 visionguard/
 ├── src/
 │   ├── main.py              # Точка входа FastAPI
+│   ├── config.py            # Конфигурация
 │   ├── api/
 │   │   ├── endpoints.py     # API маршруты
-│   │   └── models.py        # Pydantic модели
+│   │   ├── models.py        # Pydantic модели
+│   │   └── dependencies.py  # FastAPI dependencies
 │   ├── services/
 │   │   ├── video_analyzer.py  # Логика анализа видео
 │   │   └── metrics.py         # Prometheus метрики
 │   ├── db/
 │   │   ├── database.py      # Подключение к БД
-│   │   └── models.py        # SQLAlchemy модели
-│   └── config.py            # Конфигурация
+│   │   ├── models.py        # SQLAlchemy модели
+│   │   └── repository.py    # Repository pattern
+│   └── utils/
+│       ├── exceptions.py    # Кастомные исключения
+│       ├── validators.py    # Валидация файлов
+│       └── file_utils.py    # Утилиты для работы с файлами
 ├── scripts/
-│   └── init_db.py           # Инициализация БД
+│   ├── init_db.py           # Инициализация БД
+│   └── generate_test_video.py  # Генерация тестовых видео
 ├── tests/
-│   ├── test_api.py
-│   └── test_video_analyzer.py
+│   ├── conftest.py          # Pytest fixtures
+│   ├── unit/                # Unit тесты
+│   └── integration/         # Интеграционные тесты
 ├── docker/
 │   ├── Dockerfile
 │   └── init.sql
 ├── docs/
-│   ├── PROJECT_PLAN.md      # План разработки
-│   └── ANALYSIS.md          # Анализ задания
+│   └── API_EXAMPLES.md      # Примеры использования API
+├── .github/
+│   ├── workflows/
+│   │   └── ci.yml           # CI/CD pipeline
+│   └── ISSUE_TEMPLATE/      # Шаблоны issues
 ├── docker-compose.yml
+├── docker-compose.dev.yml
 ├── requirements.txt
+├── requirements-dev.txt
 ├── .env.example
 ├── .gitignore
+├── CONTRIBUTING.md
 ├── LICENSE
 └── README.md
 ```
@@ -213,15 +232,15 @@ print(response.json())
 ## 📋 Статус разработки
 
 - [x] Инициализация репозитория и документации
-- [ ] Настройка FastAPI и базовой структуры
-- [ ] Реализация эндпоинта POST /analyze
-- [ ] Интеграция OpenCV для анализа видео
-- [ ] Настройка PostgreSQL и моделей БД
-- [ ] Реализация эндпоинта GET /metrics
-- [ ] Докеризация приложения
-- [ ] Написание тестов
-- [ ] Документация API (Swagger)
-- [ ] Финальное тестирование
+- [x] Настройка FastAPI и базовой структуры
+- [x] Реализация эндпоинта POST /analyze
+- [x] Интеграция OpenCV для анализа видео
+- [x] Настройка PostgreSQL и моделей БД
+- [x] Реализация эндпоинта GET /metrics
+- [x] Докеризация приложения
+- [x] Написание тестов (покрытие 80%+)
+- [x] Документация API (Swagger)
+- [x] CI/CD pipeline (GitHub Actions)
 
 ## 🔧 Переменные окружения
 
@@ -252,16 +271,25 @@ FRAME_SAMPLE_RATE=5
 
 ## 🚀 Планы развития
 
-См. [`docs/PROJECT_PLAN.md`](docs/PROJECT_PLAN.md)
+- Асинхронная обработка видео (Celery + RabbitMQ)
+- ML модели для детекции нарушений (YOLO)
+- Real-time обработка видеопотоков (RTSP, WebRTC)
+- Kubernetes deployment (Helm charts)
+- Веб-интерфейс для мониторинга
 
 ## 📄 Лицензия
 
 MIT License - см. файл [LICENSE](LICENSE)
 
+## 🤝 Контрибуция
+
+Мы рады любой помощи! Пожалуйста, прочтите [CONTRIBUTING.md](CONTRIBUTING.md) для деталей.
+
 ## 📞 Контакты
 
 - GitHub: [@shuldeshoff](https://github.com/shuldeshoff)
 - Репозиторий: [visionguard](https://github.com/shuldeshoff/visionguard)
+- Issues: [GitHub Issues](https://github.com/shuldeshoff/visionguard/issues)
 
 ---
 
